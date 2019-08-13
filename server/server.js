@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //PASARLO A JSON
 app.use(bodyParser.json());
 
-app.use(require('./routes/usuario'));
+//COnfiguriacion global de rutas
+app.use(require('./routes/index'));
 
 mongoose.connect(process.env.URL,{useNewUrlParser:true, useCreateIndex:true} ,(err, res) => {
     if (err) throw err;
