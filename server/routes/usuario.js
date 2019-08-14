@@ -5,7 +5,7 @@ const _ = require('underscore');
 
 const app = express();
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', (req, res) => {
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
