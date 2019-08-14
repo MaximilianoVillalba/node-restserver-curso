@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 // Verificar Token
 // ===================
 
-let verificaToken = (req, res, next) =>{
+let verificaToken = (req, res, nclext) =>{
     let token = req.get('token');//De esta manera obtengo los headers,
     //donde token es lo que se envia por el postman
 
