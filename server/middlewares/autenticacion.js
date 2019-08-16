@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken');
 // Verificar Token
 // ===================
 
-let verificaToken = (req, res, nclext) =>{
+let verificaToken = (req, res, nclext) => {
     let token = req.get('token');//De esta manera obtengo los headers,
     //donde token es lo que se envia por el postman
 
-    jwt.verify(token, process.env.SEED, (err, decoded) =>{
-        if(err){
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        if (err) {
             return res.status(401).json({
                 ok: false,
-                err:{
+                err: {
                     message: 'Token no valido'
                 }
             })
@@ -22,7 +22,7 @@ let verificaToken = (req, res, nclext) =>{
         next();
     });
 
-    
+
 };
 
 // ===================
@@ -31,14 +31,22 @@ let verificaToken = (req, res, nclext) =>{
 let verificaAdmin_Role = (req, res, next) => {
     let usuario = req.usuario;
 
-    res.json({
-        ok: false,
-        err: {
-            message: 'El usuario no es administrador'
-        }
-    })
-}
+    if (usuario.role === 'ADMIN_ROLE') {
+        next();
+    } else {
+        res.json({
+            ok: false,
+            err: {
+                message: 'El usuario no es administrador'
+            }
+        });
+    }
+
+
+
+};
 
 module.exports = {
-    verificaToken
+    verificaToken,
+    verificaAdmin_Role
 }
