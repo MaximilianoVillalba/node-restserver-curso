@@ -12,16 +12,32 @@ let verificaToken = (req, res, nclext) =>{
         if(err){
             return res.status(401).json({
                 ok: false,
-                err
+                err:{
+                    message: 'Token no valido'
+                }
             })
         }
 
         req.usuario = decoded.usuario;//todo esto es el payload
-        next;
+        next();
     });
 
     
 };
+
+// ===================
+// Verificar AdminRol
+// ===================
+let verificaAdmin_Role = (req, res, next) => {
+    let usuario = req.usuario;
+
+    res.json({
+        ok: false,
+        err: {
+            message: 'El usuario no es administrador'
+        }
+    })
+}
 
 module.exports = {
     verificaToken

@@ -45,7 +45,7 @@ app.get('/usuario', verificaToken,(req, res) => {
         });
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', verificaToken,function(req, res) {
 
     let body = req.body;
     var salt = bcrypt.genSaltSync(10);
@@ -72,7 +72,7 @@ app.post('/usuario', function(req, res) {
     });
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id',verificaToken,function(req, res) {
 
     let id = req.params.id; //PARA TOMAR LO QUE SE MANDE POR LA URL
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -94,7 +94,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id',verificaToken, function(req, res) {
     let id = req.params.id;
     let cambiaEstado = {
         estado:false
